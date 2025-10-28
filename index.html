@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Localizador de IP | IPinfo.io</title>
+    <meta name="author" content="Onivaldo Miquelino">  
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Define a altura do mapa para ser responsivo */
+        #map { height: 400px; }
+    </style>
+</head>
+<body class="bg-slate-50 full-page-container flex items-start justify-center p-4">
+    <div id="ip-info-container" class="bg-white shadow-2xl rounded-xl w-full max-w-4xl p-8 transform transition duration-500 hover:scale-[1.01]">
+        
+        <h1 class="text-3xl font-extrabold text-blue-700 mb-6 border-b-4 border-blue-500 pb-2">
+         Informações do Seu Endereço IP
+        </h1>
+
+        <form id="ip-search-form" class="mb-8 flex flex-col sm:flex-row gap-3">
+            <input 
+                type="text" 
+                id="ip-input" 
+                placeholder="Digite um endereço IP (ex: 8.8.8.8)"
+                class="flex-grow p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-300 shadow-inner"
+            >
+            <button 
+                type="submit"
+                id="search-button"
+                class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out shadow-md hover:shadow-lg sm:w-auto w-full"
+            >
+                Buscar IP
+            </button>
+            <button 
+                type="button"
+                id="my-ip-button"
+                class="bg-gray-400 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-500 transition duration-300 ease-in-out shadow-md sm:w-auto w-full"
+            >
+                Meu IP
+            </button>
+        </form>
+                
+                <div class="bg-white rounded-lg shadow-md p-4">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-sliders-h mr-2 text-blue-500"></i>
+                        Controles do Mapa
+                    </h2>        
+                    
+                    <!-- Camadas -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-medium text-gray-700 mb-2">Camadas do Mapa</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="map-layer" value="street" checked class="text-blue-600">
+                                <span class="text-sm text-gray-600">Ruas</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="map-layer" value="satellite" class="text-blue-600">
+                                <span class="text-sm text-gray-600">Satélite</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="map-layer" value="topo" class="text-blue-600">
+                                <span class="text-sm text-gray-600">Topográfico</span>
+                            </label>
+                        </div>
+                    </div>
+
+        <div id="map-container" class="mb-8 rounded-lg overflow-hidden shadow-xl border-4 border-gray-200" style="display: none;">
+            <div id="map"></div>
+        </div>
+                   
+           <div id="location-summary" class="bg-blue-50 p-4 rounded-lg shadow-inner mb-8" style="display: none;">
+            <p class="text-lg font-semibold text-blue-700">
+            	<i class="fas fa-info-circle mr-2 text-green-500"></i>
+                Localização Completa: <span id="full-location" class="font-normal text-gray-700"></span>
+            </p>
+        </div>         
+        
+ </div><br>
+<!-- 18998248103   -->
+        <div id="data-display" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="loader" class="col-span-full flex justify-center items-center py-12">
+                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
+                <p class="ml-4 text-gray-500 font-medium">Carregando dados do IP...</p>
+            </div>
+            
+            </div>
+
+        <p class="mt-8 text-sm text-gray-400 text-center">
+            Dados fornecidos pela API pública e gratuita <a href="https://ipinfo.io" target="_blank" class="text-blue-500 hover:text-blue-700">ipinfo.io</a>.
+        </p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
